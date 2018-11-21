@@ -3,14 +3,20 @@ import Like from "./common/like";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
     currentPage: 1,
-    pageSize: 4
+    pageSize: 4,
+    genres: []
   };
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() });
+  }
 
   handleDelete = movieq => {
     // console.log(movie);
@@ -43,7 +49,7 @@ class Movies extends Component {
     return (
       <div className="row">
         <div className="col-2">
-          <ListGroup />
+          <ListGroup items={this.state.genres} />
         </div>
         <div className="col">
           <p>Showing {count} movies in the database.</p>

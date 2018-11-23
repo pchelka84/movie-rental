@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 class TableBody extends Component {
   render() {
@@ -8,7 +9,7 @@ class TableBody extends Component {
         {data.map(item => (
           <tr>
             {columns.map(column => (
-              <td />
+              <td>{_.get(item, column.path)}</td>
             ))}
           </tr>
         ))}

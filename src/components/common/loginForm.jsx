@@ -19,9 +19,8 @@ class LoginForm extends Component {
 
   // Validating the entire form
   validate = () => {
-    const { error } = Joi.validate(this.state.account, this.schema, {
-      abortEarly: false
-    });
+    const options = { abortEarly: false };
+    const { error } = Joi.validate(this.state.account, this.schema, options);
 
     if (!error) return null;
 

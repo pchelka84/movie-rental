@@ -27,7 +27,8 @@ class LoginForm extends Component {
 
     const errors = this.validate();
     console.log(errors);
-    this.setState({ errors });
+    // erros should never be null
+    this.setState({ errors: errors || {} });
     if (errors) return;
 
     // call the server

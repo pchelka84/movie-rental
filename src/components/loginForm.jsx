@@ -17,18 +17,6 @@ class LoginForm extends Component {
       .label("Password")
   };
 
-  // Validating the entire form
-  validate = () => {
-    const options = { abortEarly: false };
-    const { error } = Joi.validate(this.state.data, this.schema, options);
-
-    if (!error) return null;
-
-    const errors = {};
-    for (let item of error.details) errors[item.path[0]] = item.message;
-    return errors;
-  };
-
   handleSubmit = e => {
     // prevents submittin gform to a server
     // which causes the full page reload
@@ -40,16 +28,12 @@ class LoginForm extends Component {
     this.setState({ errors: errors || {} });
     if (errors) return;
 
-    // call the server
-    console.log("Submitted");
+    this.doSubmit();
   };
 
-  // Validating only one input
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
+  doSubmit = () => {
+    // call the server
+    console.log("Submitted");
   };
 
   handleChange = ({ currentTarget: input }) => {

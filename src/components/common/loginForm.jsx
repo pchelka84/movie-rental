@@ -7,6 +7,7 @@ class LoginForm extends Component {
     errors: {}
   };
 
+  // Validating the entire form
   validate = () => {
     const errors = {};
 
@@ -35,10 +36,28 @@ class LoginForm extends Component {
     console.log("Submitted");
   };
 
+  // Validating only one input
+  validateProperty = ({ name, value }) => {
+    if (name === "username") {
+      if (value.trim() === "") return "Username is required.";
+      // ...
+    }
+    if (name === "password") {
+      if (value.trim() === "") return "Password is required.";
+      // ...
+    }
+  };
+
   handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMeassage = this.validateProperty(input);
+    if (errorMeassage) errors[input.name] = errorMeassage;
+    else delete errors[input.name];
+
     const account = { ...this.state.account };
     account[input.name] = input.value;
-    this.setState({ account: account });
+
+    this.setState({ account: account, errors });
   };
 
   render() {

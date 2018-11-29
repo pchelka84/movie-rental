@@ -1,12 +1,12 @@
 import React from "react";
 
-const Input = ({ name }) => {
+const Input = ({ name, label, value, onChange }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name}>Username</label>
+      <label htmlFor={name}>{label}</label>
       <input
-        value={account.username}
-        onChange={this.handleChange}
+        value={value}
+        onChange={onChange}
         autoFocus
         id={name}
         name={name}

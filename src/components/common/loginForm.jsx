@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
-  username = React.createRef();
-
-  //   componentDidMount() {
-  //     this.username.current.focus();
-  //   }
-
   handleSubmit = e => {
     // prevents submittin gform to a server
     // which causes the full page reload
     e.preventDefault();
 
     // call the server
-    const username = this.username.current.value;
     console.log("Submitted");
   };
 
@@ -26,7 +19,6 @@ class LoginForm extends Component {
             <label htmlFor="username">Username</label>
             <input
               autoFocus
-              ref={this.username}
               id="username"
               type="text"
               className="form-control"

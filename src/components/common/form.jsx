@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Joi from "joi-browser";
 
 class Form extends Component {
@@ -52,6 +52,14 @@ class Form extends Component {
 
     this.setState({ data: data, errors });
   };
+
+  renderButton(label) {
+    return (
+      <button disabled={this.validate()} className="btn btn-primary">
+        {label}
+      </button>
+    );
+  }
 }
 
 export default Form;

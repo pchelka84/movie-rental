@@ -14,6 +14,12 @@ class LoginForm extends Component {
     console.log("Submitted");
   };
 
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account.username = e.currentTarget.value;
+    this.setState({ account: account });
+  };
+
   render() {
     return (
       <div>
@@ -23,6 +29,7 @@ class LoginForm extends Component {
             <label htmlFor="username">Username</label>
             <input
               value={this.state.account.username}
+              onChange={this.handleChange}
               autoFocus
               id="username"
               type="text"

@@ -26,6 +26,32 @@ class Form extends Component {
     const { error } = Joi.validate(obj, schema);
     return error ? error.details[0].message : null;
   };
+
+  handleSubmit = e => {
+    // prevents submittin gform to a server
+    // which causes the full page reload
+    e.preventDefault();
+
+    const errors = this.validate();
+    console.log(errors);
+    // erros should never be null
+    this.setState({ errors: errors || {} });
+    if (errors) return;
+
+    this.doSubmit();
+  };
+
+  handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMeassage = this.validateProperty(input);
+    if (errorMeassage) errors[input.name] = errorMeassage;
+    else delete errors[input.name];
+
+    const data = { ...this.state.data };
+    data[input.name] = input.value;
+
+    this.setState({ data: data, errors });
+  };
 }
 
 export default Form;

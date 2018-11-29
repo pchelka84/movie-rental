@@ -17,20 +17,6 @@ class LoginForm extends Component {
       .label("Password")
   };
 
-  handleSubmit = e => {
-    // prevents submittin gform to a server
-    // which causes the full page reload
-    e.preventDefault();
-
-    const errors = this.validate();
-    console.log(errors);
-    // erros should never be null
-    this.setState({ errors: errors || {} });
-    if (errors) return;
-
-    this.doSubmit();
-  };
-
   doSubmit = () => {
     // call the server
     console.log("Submitted");

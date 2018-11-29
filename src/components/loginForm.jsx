@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
+import Form from "./common/form";
 import Input from "./common/input";
 
-class LoginForm extends Component {
+class LoginForm extends Form {
   state = {
     data: { username: "", password: "" },
     errors: {}
@@ -20,18 +21,6 @@ class LoginForm extends Component {
   doSubmit = () => {
     // call the server
     console.log("Submitted");
-  };
-
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMeassage = this.validateProperty(input);
-    if (errorMeassage) errors[input.name] = errorMeassage;
-    else delete errors[input.name];
-
-    const data = { ...this.state.data };
-    data[input.name] = input.value;
-
-    this.setState({ data: data, errors });
   };
 
   render() {

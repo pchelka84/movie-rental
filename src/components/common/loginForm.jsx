@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
+  state = {
+    account: { username: "", password: "" }
+  };
+
   handleSubmit = e => {
     // prevents submittin gform to a server
     // which causes the full page reload
@@ -18,6 +22,7 @@ class LoginForm extends Component {
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
+              value={this.state.account.username}
               autoFocus
               id="username"
               type="text"

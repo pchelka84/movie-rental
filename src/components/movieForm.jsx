@@ -1,17 +1,23 @@
 import React from "react";
+import Form from "./common/form";
 
-const MovieForm = ({ match, history }) => {
-  return (
-    <div>
-      <h1>Movie Form {match.params.id}</h1>
-      <button
-        className="btn btn-primary"
-        onClick={() => history.push("/movies")}
-      >
-        Save
-      </button>
-    </div>
-  );
-};
+class MovieForm extends Form {
+  state = {};
+  render() {
+    const { match, history } = this.props;
+
+    return (
+      <div>
+        <h1>Movie Form {match.params.id}</h1>
+        <button
+          className="btn btn-primary"
+          onClick={() => history.push("/movies")}
+        >
+          Save
+        </button>
+      </div>
+    );
+  }
+}
 
 export default MovieForm;

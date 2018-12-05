@@ -1,10 +1,16 @@
-import React from 'react';
+import React from "react";
 
-class Search extends Component {
-    state = {  }
-    render() { 
-        return (  );
-    }
-}
- 
+const Search = ({ value, onChange }) => {
+  return (
+    <input
+      type="text"
+      name="query"
+      classname="form-control my-3"
+      placeholder="Search..."
+      value={value}
+      onChange={e => onChange(e.currentTarget.value)}
+    />
+  );
+};
+
 export default Search;

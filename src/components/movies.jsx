@@ -7,7 +7,7 @@ import Pagination from "./common/pagination";
 import { getMovies } from "../services/fakeMovieService";
 import { getGenres } from "../services/fakeGenreService";
 import { paginate } from "../utils/paginate";
-import { paginate } from "./common/search";
+import Search from "./common/search";
 import _ from "lodash";
 
 class Movies extends Component {
@@ -64,13 +64,17 @@ class Movies extends Component {
       currentPage,
       selectedGenre,
       movies: allMovies,
-      sortColumn
+      sortColumn,
+      searchQuery
     } = this.state;
 
-    const filtered =
-      selectedGenre && selectedGenre._id
-        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-        : allMovies;
+    let filtered = allMovies;
+    if (searchQuery)
+      filtered = allMovies.filter(m =>
+        m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
+      );
+    else if (selectedGenre && selectedGenre._id)
+      filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
 
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
@@ -105,7 +109,7 @@ class Movies extends Component {
             New Movie
           </Link>
           <p>Showing {totalCount} movies in the database.</p>
-          <Search value={searchQuery} onChange={this.handleSearch} />
+          <Search value={this.searchQuery} onChange={this.handleSearch} />
           <MoviesTable
             movies={movies}
             onLike={this.handleLike}
